@@ -56,7 +56,9 @@
     - 硬盘概念: 磁区, 磁轨, 磁柱
     - 性能指标: IOPS
     - 文件系统
-      - NTFS
+      - Linux: ext2/ext3/ext4, xfs, swap, bios boot 
+      - Windows: ntfs
+      - 通用: vfat
     - MSDOS, GPT
   - 显卡
   - I/O地址, IRQ中断
@@ -89,7 +91,7 @@
 - /proc/cpuinfo: cpu的详细信息
 - /etc/os-release: linux发行版详细信息
 - 硬盘
-  - /dev/sd[a-p]: SCSI/SATA/USB
+  - /dev/sd[a-p][1-9]?: SCSI/SATA/USB, 其中1-4为主要分割槽, 5-9为逻辑分割槽
   - /dev/vd[a-p]: 虚拟机
   - /dev/fd[0-1]: 软盘
   - /dev/hd[a-d]: IDE硬盘(旧式系统才有)
@@ -120,12 +122,14 @@
 ## Shell
 - cmd
   - uname -r: 查看linux内核版本
+  - dd if=centos7.iso of=/dev/sdc: 烧录iso文件
 - script
 ## 网络
-## 虚拟机
+## 虚拟化
 - VirtualBox
 - VMWare
 - KVM(Linux自带)
+- WSL
 ## SSH
 - `ssh <username>@<host>`: ssh进行登录, 指定用户与主机
   - `-i <private_key_path>`: 以公私钥的方式认证, 指定私钥文件地址
@@ -153,7 +157,43 @@
 文件系统
 I/O模型
 
+fdisk gdisk parted grub
+
 BIOS UEFI MSOS GPT
+
+- 开机程序
+  - BIOS
+  - UEFI
+
+- CMOS: DRAM, 记录主板参数, 系统时间,CPU电压与频率, 各项设备I/O地址与IRQ
+- BIOS: ROM, 开机程序
+
+
+- 磁区512Byte, 磁区4KB
+
+BIOS/UEFI->MBR中的boot loader程序->操作系统
+
+- boot loader
+ 1. 直接启动操作系统
+ 2. 提供选项, 转交给其他loader(多系统)
+
+ grub, BIOS loader
+
+- 每组分割槽第一个磁区为开机磁区(boot sector)
+
+- MBR: 最多4组分割, 每组分割16Byte, 管理2T存储量
+  - 第一磁区: 512Byte
+    - 开机启动记录MBR: 446Byte, 内含开机管理程序(boot loader)
+    - Primary与Extended分割表: 64Byte, 保存Primary分割记录与Extended分割记录, 每组记录16Byte, 最多4组, 延伸分割只能有一组
+  - Logic分割表: 在延伸分割槽内, 记录逻辑分割记录, 每组记录16Byte
+
+- GPT: 最多128组分割, 每组分割128Byte, 管理8ZB存储量
+  - 第一磁区： 4KB
+    - 开机启动记录MBR: 446Byte, LBA0
+    - GPT表头记录: LBA1
+    - 分割表: LBA2-33, 每个区块512Byte
+
+NAT, SAMBA, MAIL, WEB, DHCP, FTP
 
 
 
