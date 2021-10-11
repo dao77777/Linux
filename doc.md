@@ -123,9 +123,14 @@
     - /etc/os-release: linux发行版详细信息
     - /proc/cpuinfo: cpu的详细信息
     - uname -r: 查看linux内核版本
+    - /etc/hostname: 主机名
+    - locale: 查看语系
+      - LANG = <语系>, export LC_ALL=<语系>: 改变语系, zh_CN.UTF-8代表中文, en_US.utf8代表英文
     - date, cal: 查询时间及日历
+    - bc: 计算器
     - /etc/profile: 环境变量配置文件
     - set: 查看环境变量
+    - --help, man, info, /usr/share/doc: 文档
     - sync: 主存数据同步到辅存
     - init <runLevel>: 常用运行级别未3, 5
       - 0: 关机
@@ -255,8 +260,10 @@
       - apt-cache show 包名: 获取包信息
       - apt-cache depends 包名: 获取包的依赖信息
       - apt-cache rdepends 包名: 获取包的被依赖信息
+  - 进程
+    - ps -aux: 查看进程状态
   - 网络
-
+    - netstat -a: 查询网络状态
   - dd if=centos7.iso of=/dev/sdc: 烧录iso文件
 - script
 ## 网络
