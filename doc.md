@@ -33,7 +33,7 @@
   - MIT license
   - Mozilla Public License 2.0
   - Common Development and Distribution License
-
+                
 # 硬件
 - CPU
   - CPU的组成: ALU CU X MAR MDR IR PC
@@ -58,7 +58,8 @@
     - 文件系统
       - Linux: ext2/ext3/ext4, xfs, swap, bios boot 
       - Windows: ntfs
-      - 通用: vfat
+      - 网络: nfs, smbfs
+      - 通用: fat, vfat
     - MSDOS, GPT
   - 显卡
   - I/O地址, IRQ中断
@@ -119,6 +120,8 @@
 - vi
 ## Shell
 - cmd
+  - other
+    - uuidgen: 生成uuid
   - 机器
     - /etc/os-release: linux发行版详细信息
     - /proc/cpuinfo: cpu的详细信息
@@ -158,13 +161,67 @@
     - halt: 关机
     - reboot: 重启
   - 文件
-    - pwd
+    - 硬盘
+      - df [<path>]: 硬盘使用情况, df -hT
+        - -h: 以易读的方式显示
+        - -a: 列出所有文件系统
+        - -T: 显示文件系统类型(如ext2/3/4, xfs等)
+      - du [<path>]: 文件占用磁盘情况
+        - -a: 列出所有文件
+        - -h: 以易读的方式显示
+        - -s: 只列出总容量
+      - lsblk: 列出所有磁盘
+        - -f: 列出磁盘的UUID
+      - parted: 磁盘分割
+      - fdisk: MBR分割表使用的磁盘分割工具
+      - gdisk: GPT分割表使用的磁盘分割工具
+      - mkfs.<file_system> <device>: 格式化分区的文件系统
+        - -f: 强制格式化, 可以用来格式化一些文件用来mount -o loop挂载
+      - mount UUID="<UUID>"/<device> <path>: 挂载分区
+        - -o <params>: 设定各种挂载参数, -o loop 可用来挂载iso映像文件
+      - umount <device>/<mount point>: 卸载分区
+      - mkswap <device>: 格式化分区文件系统为swap格式
+      - swapon <device>: 开启该swap分区
+        - -s: 查看swap分区的使用情况
+      - free: 查看内存与swap分区的占用情况
+        - -h: 以易读的方式显示
+      - /etc/fstab: 开机挂载设置, 格式为 UUID 挂载点 文件系统 参数 dump fsck
+    - tar
+      - -z: gzip压缩/解压
+      - -j: bzip2压缩/解压
+      - -J: xz压缩、解压
+      - -c: 打包 
+      - -x: 解包
+      - -t: 查询
+      - -v: 过程中显示文件名
+      - -f <filename>: 指定目标文件
+      - -C <path>: 用于在解压缩中指定目录
+      - -p: 保留文件权限与属性
+      - -P: 保留绝对路径
+      - --exclude=<filename>: 排除某个文件
+    - dd if=<input_file> of=<output_file> bs=<block_size> count=<block_count>
+    - pwd: 打印当前工作目录
+      - -P: 真实路径, 而不是链接
     - ls
+    - basename <path>: 给出路径文件名
+    - dirname <path>: 给出路径目录名
+    - file <filename>: 查看文件类型, 有没有使用到动态函数库等信息
+    - which <cmd>: 查询命令所在路径
+    - whereis
+    - locate
     - find <finame | dirname>: 从指定目录开搜
       - -name <filename | dirname>: 指定文件或目录
       - -user <user>: 指定用户
       - -size <file_size>: 指定文件大小(+n 大于, -n小于, n等于, 单位k, M, G)
       - -atime <day>: 指定天数(+n大于, -n小于, n等于)
+    - od <filename>: 二进制的方式读取文档
+      - -t: 设置显示类型
+        - a       : 利用預設的字元來輸出；
+        - c       : 使用 ASCII 字元來輸出
+        - d[size] : 利用十進位(decimal)來輸出資料，每個整數佔用 size bytes
+        - f[size] : 利用浮點數值(floating)來輸出資料，每個數佔用 size bytes
+        - o[size] : 利用八進位(octal)來輸出資料，每個整數佔用 size bytes
+        - x[size] : 利用十六進位(hexadecimal)來輸出資料，每個整數佔用 size bytes
     - cat <filename>
     - more <filename>
     - less <filename>
@@ -176,14 +233,13 @@
     - vi | vim <filename>: 文本编辑
     - cd <dirname>: 切换目录
     - mkdir <dirname>: 创建目录
+      - -p: 创建多级目录
     - touch <filename>: 创建文件
     - cp <source> <dest>: 复制
+    - ln
     - mv <source> <dest>: 剪切(重命名)
     - rm -rf <filename | dirname>: 删除
     - ln <source> <dest> [-r]: 创建链接/软链接
-    - gzip | gunzip <filename | dirname>: 压缩解压.gz
-    - zip <dest> <source> | unzip <filename | dirname>: 压缩解压.zip
-    - tar -zcvf <dest> <source> | tar -zxvf <source>: 压缩解压 .tar.gz
     - grep
     - awk
     - sed
@@ -199,6 +255,7 @@
     - /etc/shadow: 加密后的用户口令
     - /etc/group: 组配置文件, 每行含义 组名:口令:gid:组内用户列表
     - visudo: 修改sudo用户
+    - umask <right>: 新创建文件或目录时默认去掉的权限, 文件默认rw-rw-rw-, 目录默认rwxrwxrwx, 减去umask的right得到默认权限
     - useradd <username>: 添加用户
     - userdel <username>: 删除用户
     - usermod <username>: 修改用户
@@ -299,51 +356,85 @@
 文件系统
 I/O模型
 
-fdisk gdisk parted grub
-
-BIOS UEFI MSOS GPT
-
-- 开机程序
-  - BIOS
-  - UEFI
-
-- CMOS: DRAM, 记录主板参数, 系统时间,CPU电压与频率, 各项设备I/O地址与IRQ
-- BIOS: ROM, 开机程序
-
-
-- 磁区512Byte, 磁区4KB
-
-BIOS/UEFI->MBR中的boot loader程序->操作系统
-
-- boot loader
- 1. 直接启动操作系统
- 2. 提供选项, 转交给其他loader(多系统)
-
- grub, BIOS loader
-
-- 每组分割槽第一个磁区为开机磁区(boot sector)
-
-- MBR: 最多4组分割, 每组分割16Byte, 管理2T存储量
-  - 第一磁区: 512Byte
-    - 开机启动记录MBR: 446Byte, 内含开机管理程序(boot loader)
-    - Primary与Extended分割表: 64Byte, 保存Primary分割记录与Extended分割记录, 每组记录16Byte, 最多4组, 延伸分割只能有一组
-  - Logic分割表: 在延伸分割槽内, 记录逻辑分割记录, 每组记录16Byte
-
-- GPT: 最多128组分割, 每组分割128Byte, 管理8ZB存储量
-  - 第一磁区： 4KB
-    - 开机启动记录MBR: 446Byte, LBA0
-    - GPT表头记录: LBA1
-    - 分割表: LBA2-33, 每个区块512Byte
 
 NAT, SAMBA, MAIL, WEB, DHCP, FTP
+RAID
 
+- CMOS: DRAM, 记录主板参数, 系统时间,CPU电压与频率, 各项设备I/O地址与IRQ
+- BIOS/UEFI: ROM, 引导程序
+
+- 辅存
+  - 分割类型
+    - MBR
+    - GPT
+  - 磁轨, 磁柱, 磁区
+  - 磁区大小
+    - MBR硬盘: 512byte
+    - GPT硬盘: 4K
+  - 第一磁区
+    - 开机启动文件: 446byte, 含开机启动管理程序, Linux中是grub
+    - 分割表
+      - MBR硬盘: 64byte, MSDOS格式
+      - GPT硬盘: 4K - 446byte, GPT格式
+  - 分区
+    - 分类: 主分区/扩展分区/逻辑分区
+    - 组成
+      - boot sector: 开机启动块, 多系统的来源
+      - 多个block group
+        - super block
+        - inode
+        - block bitmap
+        - inode bitmap
+        - data block
+
+
+- 文件种类
+  - -: 常规文件
+    - 纯文字
+    - 二进制
+    - 特定格式
+  - d: 目录
+  - l: 链接
+  - b: 区块设备, 可以随机在设备不同区块中读写, 如硬盘
+  - c: 字符设备, 一次性读取, 能够不断输出的设备, 如键鼠
+  - s: 套接字
+  - p: 管道
+
+- 路径
+  - .: 当前目录
+  - ..: 上级目录
+  - -: 上一个目录
+  - ~: 家目录
 
 CPU, 显卡, 主存, 辅存, 网卡, 总线, 其它设备
 BIOS/UEFI, MBR开机管理程序, 操作系统
 进程管理, 文件系统, 权限
 
+- 环境变量
+  - $PATH: 记录了所有
+内存
+- 文件
+  - metadata: fileSystem description, superblock, inode bitmap, block bitmap
+  - data: inode, data block
+  - 索引式文件系统, 链式文件系统
+  - mtime: 内容更新时间
+  - ctime: 权限属性更新时间
+  - atime: 内容被取用更新时间
+权限
+  - 普通权限
+  - 隐藏权限
+  - 特殊权限
+    - SUID, SGID, SBIT
+软件
+进程
+网络
 
-
-
-
-
+- .Z: compress
+- .zip: zip
+- .gz: gzip
+- .bz2: bzip2
+- .xz: xz
+- .tar: tar, 只进行打包, 不进行压缩
+- .tar.gz: tar打包与gzip压缩
+- .tar.bz2: tar打包与bzip2压缩
+- .tar.xz: tar打包与xz压缩
