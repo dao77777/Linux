@@ -320,7 +320,15 @@
   - 进程
     - ps -aux: 查看进程状态
   - 网络
-    - netstat -a: 查询网络状态
+    - netstat -ano/-tln: 查询网络状态
+    - ping <IP>: 测试主机是否能ping通
+    - telnet <IP> <PORT>: 测试指定IP与PORT的服务
+    - curl <IP> <PORT>: 发送HTTP请求
+      - -I: 显示头部
+      - -d <param>: 携带参数
+      - -X <method>: 指定请求方法
+      - -H <head>: 自定义头部
+    - export http_proxy="http:<IP>:<PORT>"
   - dd if=centos7.iso of=/dev/sdc: 烧录iso文件
 - script
 ## 网络
@@ -334,6 +342,7 @@
   - `-i <private_key_path>`: 以公私钥的方式认证, 指定私钥文件地址
   - `-p <port>`: 指定ssh连接的端口号, 默认22
 - `ssh-keygen -o`: 生成公私钥匙, 默认生成地址为`~/.ssh`
+- `scp`
 - `~/.ssh/authorized_keys`: 配置认证的用户, 用公钥表示
 - `~/.ssh/known_hosts`: 与另一用户进行ssh通信后会自动生成known_hosts, 表示知道了该用户
 - `~/.ssh/config`: 用于配置ssh通信的目标, 本来是ssh `<username>@<host> -p <port> -i <private_key_path>`连接目标用户, 配置了后直接ssh config_user连接目标用户, 格式为
