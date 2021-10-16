@@ -161,6 +161,58 @@
     - halt: 关机
     - reboot: 重启
   - 文件
+    - 目录树
+      - pwd: 打印当前工作目录
+        - -P: 真实路径, 而不是链接
+      - ls
+      - basename <path>: 给出路径文件名
+      - dirname <path>: 给出路径目录名
+      - file <filename>: 查看文件类型, 有没有使用到动态函数库等信息
+      - which <cmd>: 查询命令所在路径
+      - whereis
+      - locate
+      - find <finame | dirname>: 从指定目录开搜
+        - -name <filename | dirname>: 指定文件或目录
+        - -user <user>: 指定用户
+        - -size <file_size>: 指定文件大小(+n 大于, -n小于, n等于, 单位k, M, G)
+        - -atime <day>: 指定天数(+n大于, -n小于, n等于)
+      - cd <dirname>: 切换目录
+      - mkdir <dirname>: 创建目录
+        - -p: 创建多级目录
+      - touch <filename>: 创建文件
+      - cp <source> <dest>: 复制
+      - ln
+      - mv <source> <dest>: 剪切(重命名)
+      - rm -rf <filename | dirname>: 删除
+      - ln <source> <dest> [-r]: 创建链接/软链接
+    - 内容
+      - od <filename>: 二进制的方式读取文档
+        - -t: 设置显示类型
+          - a       : 利用預設的字元來輸出；
+          - c       : 使用 ASCII 字元來輸出
+          - d[size] : 利用十進位(decimal)來輸出資料，每個整數佔用 size bytes
+          - f[size] : 利用浮點數值(floating)來輸出資料，每個數佔用 size bytes
+          - o[size] : 利用八進位(octal)來輸出資料，每個整數佔用 size bytes
+          - x[size] : 利用十六進位(hexadecimal)來輸出資料，每個整數佔用 size bytes
+      - cat <filename>
+      - more <filename>
+      - less <filename>
+      - head <filename>: 显示头几行
+        - -n <行数>: 指定行数
+      - tail <filename>: 显示末几行
+        - -n <行数>: 指定行数
+        - -f: 同步刷新
+      - vi | vim | nano <filename>: 文本编辑
+      - grep
+      - awk
+      - sed
+      - wc
+      - cut
+      - sort
+      - uniq
+      - |: 管道符
+      - >: 输出重定向, 覆盖
+      - >>: 输出重定向, 追加
     - 硬盘
       - df [<path>]: 硬盘使用情况, df -hT
         - -h: 以易读的方式显示
@@ -186,70 +238,27 @@
       - free: 查看内存与swap分区的占用情况
         - -h: 以易读的方式显示
       - /etc/fstab: 开机挂载设置, 格式为 UUID 挂载点 文件系统 参数 dump fsck
-    - tar
-      - -z: gzip压缩/解压
-      - -j: bzip2压缩/解压
-      - -J: xz压缩、解压
-      - -c: 打包 
-      - -x: 解包
-      - -t: 查询
-      - -v: 过程中显示文件名
-      - -f <filename>: 指定目标文件
-      - -C <path>: 用于在解压缩中指定目录
-      - -p: 保留文件权限与属性
-      - -P: 保留绝对路径
-      - --exclude=<filename>: 排除某个文件
-    - dd if=<input_file> of=<output_file> bs=<block_size> count=<block_count>
-    - pwd: 打印当前工作目录
-      - -P: 真实路径, 而不是链接
-    - ls
-    - basename <path>: 给出路径文件名
-    - dirname <path>: 给出路径目录名
-    - file <filename>: 查看文件类型, 有没有使用到动态函数库等信息
-    - which <cmd>: 查询命令所在路径
-    - whereis
-    - locate
-    - find <finame | dirname>: 从指定目录开搜
-      - -name <filename | dirname>: 指定文件或目录
-      - -user <user>: 指定用户
-      - -size <file_size>: 指定文件大小(+n 大于, -n小于, n等于, 单位k, M, G)
-      - -atime <day>: 指定天数(+n大于, -n小于, n等于)
-    - od <filename>: 二进制的方式读取文档
-      - -t: 设置显示类型
-        - a       : 利用預設的字元來輸出；
-        - c       : 使用 ASCII 字元來輸出
-        - d[size] : 利用十進位(decimal)來輸出資料，每個整數佔用 size bytes
-        - f[size] : 利用浮點數值(floating)來輸出資料，每個數佔用 size bytes
-        - o[size] : 利用八進位(octal)來輸出資料，每個整數佔用 size bytes
-        - x[size] : 利用十六進位(hexadecimal)來輸出資料，每個整數佔用 size bytes
-    - cat <filename>
-    - more <filename>
-    - less <filename>
-    - head <filename>: 显示头几行
-      - -n <行数>: 指定行数
-    - tail <filename>: 显示末几行
-      - -n <行数>: 指定行数
-      - -f: 同步刷新
-    - vi | vim <filename>: 文本编辑
-    - cd <dirname>: 切换目录
-    - mkdir <dirname>: 创建目录
-      - -p: 创建多级目录
-    - touch <filename>: 创建文件
-    - cp <source> <dest>: 复制
-    - ln
-    - mv <source> <dest>: 剪切(重命名)
-    - rm -rf <filename | dirname>: 删除
-    - ln <source> <dest> [-r]: 创建链接/软链接
-    - grep
-    - awk
-    - sed
-    - wc
-    - cut
-    - sort
-    - uniq
-    - |: 管道符
-    - >: 输出重定向, 覆盖
-    - >>: 输出重定向, 追加
+    - 压缩备份
+      - tar
+        - -z: gzip压缩/解压
+        - -j: bzip2压缩/解压
+        - -J: xz压缩、解压
+        - -c: 打包 
+        - -x: 解包
+        - -t: 查询
+        - -v: 过程中显示文件名
+        - -f <filename>: 指定目标文件
+        - -C <path>: 用于在解压缩中指定目录
+        - -p: 保留文件权限与属性
+        - -P: 保留绝对路径
+        - --exclude=<filename>: 排除某个文件
+      - xfsdump
+      - xfsrestore
+      - mkisofs
+      - isoinfo
+      - cdrecord
+      - cpio
+      - dd if=<input_file> of=<output_file> bs=<block_size> count=<block_count>
   - 权限
     - /etc/passwd: 用户配置文件, 每行含义 用户名:口令:uid:gid:注释/主目录/登录shell
     - /etc/shadow: 加密后的用户口令
@@ -447,3 +456,14 @@ BIOS/UEFI, MBR开机管理程序, 操作系统
 - .tar.gz: tar打包与gzip压缩
 - .tar.bz2: tar打包与bzip2压缩
 - .tar.xz: tar打包与xz压缩
+
+- Bourne SHell(sh)
+- C SHell
+- K SHell
+- TCSH
+- Bourne Again SHell(bash)
+- /etc/shells: 可以使用的shell
+- ~/.bash_history: 上次登录的命令的历史记录
+- ~/.bashrc: 用户登录bash初始化指令
+- type <cmd>: 查看该指令是否内建
+- \可以跳脱回车键
