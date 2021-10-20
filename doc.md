@@ -464,6 +464,69 @@ BIOS/UEFI, MBR开机管理程序, 操作系统
 - Bourne Again SHell(bash)
 - /etc/shells: 可以使用的shell
 - ~/.bash_history: 上次登录的命令的历史记录
-- ~/.bashrc: 用户登录bash初始化指令
 - type <cmd>: 查看该指令是否内建
 - \可以跳脱回车键
+- 环境变量
+  - HOME: 家目录
+  - SHELL: 当前环境用的哪个shell程序
+  - HISTSIZE: 历史命令的个数
+  - MAIL: 邮件
+  - PATH: 路径
+  - LANG: 语系
+  - RANDOM: 随机数
+- 自定变量
+  - HISTFILE: 历史命令放置的文档
+  - PS1: 命令提示符
+  - PS2: 命令跳脱符
+  - $: 当前shell使用的PID
+  - ?: 刚执行完的指令的回传值
+- ${<variable>}: 表示变量
+  - <variable[#|##|%|%%]delete>: 表示该变量删除delete部分后的值, #从前删除最短的, ##从前删除最长的, %从后删除最短的, %%从后删除最长的
+  - <variable[/old/new|//old/new]>: 替换变量中指定字符串, /表示替换一次, //表示替换所有
+  - <variable[-|:-|=|?]default>: -表示若变量不存在用默认代替, :-表示若变量不存在或为空用默认代替, =表示在-基础上用默认值给variable赋值, ?表示不存在则报错
+- $(<cmd>): 表示执行命令后返回的值
+- <variable>="<value>": 设置变量的值
+- unset <variable>: 取消变量设置
+- export <variable>: 将变量变为环境变量
+- echo ${<variable>}: 打印变量
+- env: 查看环境变量
+- set: 显示该shell所有变量
+- read [-p <tips>] [-t <wait_time>] <variable>: 与键盘交互
+- declare [-aixrp <variable>]: 设置变量的类型, a为数组, i为整型, x为环境变量(+x为取消环境变量), r为只读, p为显示该变量的属性
+- ulimit [-SHacdfltu]: 设置使用者的限制
+- alias <alias>=<cmd>: 给命令起别名, 不加参数则显示所有别名
+- unalias <alias>: 取消别名设置
+
+- ~/.bash_logout
+- ~/.bashrc: 用户登录bash初始化指令
+- locale -a: 显示所有支持的编码
+- locale: 显示语系相关的变量
+- /usr/lib/locale
+- /etc/locale.conf
+- /etc/issue, /etc/motd: 进站欢迎信息
+  - \d 本地端時間的日期
+  - \l 顯示第幾個終端機介面
+  - \m 顯示硬體的等級 (i386/i486/i586/i686...)
+  - \n 顯示主機的網路名稱
+  - \O 顯示 domain name
+  - \r 作業系統的版本 (相當於 uname -r)
+  - \t 顯示本地端時間的時間
+  - \S 作業系統的名稱
+  - \v 作業系統的版本
+- /etc/profile
+- ~/.bash_profile
+- ~/.bash_login
+- ~/.profile
+
+主机名
+开机语
+欢迎语
+命令行提示符
+命令行跳脱符
+语系
+环境变量
+自定变量
+文件
+权限
+进程
+网络
