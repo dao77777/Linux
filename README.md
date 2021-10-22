@@ -339,6 +339,30 @@
       - -H <head>: 自定义头部
     - export http_proxy="http:<IP>:<PORT>"
   - dd if=centos7.iso of=/dev/sdc: 烧录iso文件
+  - 服务
+    - 配置文件
+      - /usr/lib/systemd/system目录: systemctl可以管理的服务
+      - /etc/init.d目录: service指令管理的服务
+    - systemctl start或stop或restart或reload或status 服务名: 启动指定服务
+    - setup: 查看服务, 设置服务自启动
+    - chkconfig 服务名 off或on: 查看service管理的服务在各个运行级别下的自启动状态
+      - --list: 查看服务
+      - --level 运行级别 服务名 off或on: 设置服务在各个级别上的自启动
+    - systemctl list-unit-files: 查看systemctl管理的服务在3和5运行级别下的自启动状态
+    - systemctl enable 服务名: 设置服务在3和5运行级别下自启动
+    - systemctl disable 服务名: 关闭服务在3和5运行级别下自启动
+    - systemctl is-enabled 服务名: 查询指定服务是否在3和5运行级别下自启动
+  - 防火墙
+    - 客户: firewall-cmd
+    - 服务: firewalld
+    - 指令
+      - firewall-cmd --list-all: 查看用户开放的所有端口
+      - firewall-cmd --zone=public --list-ports: 查看所有用户自己开放的端口
+      - firewall-cmd --permanent --add-port=端口号/协议: 开放端口访问
+      - firewall-cmd --permanent --remove-port=端口号/协议: 关闭端口访问
+      - firewall-cmd --reload: 重新载入服务才能生效
+      - firewall-cmd --query-port=端口/协议: 查询端口是否开放
+  - 任务调度
 - script
 ## 网络
 ## 虚拟化
