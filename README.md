@@ -131,8 +131,6 @@
       - LANG = <语系>, export LC_ALL=<语系>: 改变语系, zh_CN.UTF-8代表中文, en_US.utf8代表英文
     - date, cal: 查询时间及日历
     - bc: 计算器
-    - /etc/profile: 环境变量配置文件
-    - set: 查看环境变量
     - --help, man, info, /usr/share/doc: 文档
     - sync: 主存数据同步到辅存
     - init <runLevel>: 常用运行级别未3, 5
@@ -327,9 +325,13 @@
       - apt-cache depends 包名: 获取包的依赖信息
       - apt-cache rdepends 包名: 获取包的被依赖信息
   - 进程
-    - ps -aux: 查看进程状态
+    - ps -aux|-ef: 查看进程状态
+    - top: 动态监控进程状态
+    - kill <PID>: 终止进程
+      - -9: 强制终止
   - 网络
-    - netstat -ano/-tln: 查询网络状态
+    - /etc/sysconfig/network-scripts/网卡: 配置文件
+    - netstat -ano|-tln: 查询网络状态
     - ping <IP>: 测试主机是否能ping通
     - telnet <IP> <PORT>: 测试指定IP与PORT的服务
     - curl <IP> <PORT>: 发送HTTP请求
@@ -337,8 +339,8 @@
       - -d <param>: 携带参数
       - -X <method>: 指定请求方法
       - -H <head>: 自定义头部
-    - export http_proxy="http:<IP>:<PORT>"
-  - dd if=centos7.iso of=/dev/sdc: 烧录iso文件
+    - wget <URL>: 下载文件
+    - export http_proxy="http:<IP>:<PORT>": 设置http代理
   - 服务
     - 配置文件
       - /usr/lib/systemd/system目录: systemctl可以管理的服务
@@ -363,6 +365,7 @@
       - firewall-cmd --reload: 重新载入服务才能生效
       - firewall-cmd --query-port=端口/协议: 查询端口是否开放
   - 任务调度
+  - dd if=centos7.iso of=/dev/sdc: 烧录iso文件
 - script
 ## 网络
 ## 虚拟化
