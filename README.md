@@ -555,3 +555,37 @@
   - 进程表
 
 - 临界资源
+
+- 进程调度算法
+- CPU调度算法
+- 虚拟内存
+- 文件系统
+
+- 虚拟化
+  - 进程, 虚拟存储, 设备抽象
+- 并发
+  - 多个程序分时共享多个处理器; 进程/线程间通信
+- 持久化
+  - UNIX文件系统和它的后代们(ext2, ext3, ext4, btrfs, xfs, zfs, ...)
+
+
+- `file <filename>`: 查看文件详细信息
+- `gcc <.c_file或asm_file>`: 编译.c文件
+- `gcc -c <.c_file或asm_file>`: 编译且链接.c文件
+- `gdb <file>`: 调试程序
+  - starti: 从第一条指令开始执行
+  - layout asm: 查看汇编
+  - info register: 查看寄存器
+- `ld <.o_file>`: 链接编译出来的.o文件, -e 指定入口函数
+- `xxd <file>`: 二进制形式查看文件
+- `objdump -d <file>`: 汇编形式查看文件
+- `readelf <elf_file>`: 查看elf文件, -h 读取elf文件头
+- `strace <cmd>`: 查看执行过程的系统调用
+
+- c编译过程: .c -> (preprocess) -> .i -> (compile) -> .s -> (assembly) -> .o -> link -> .out
+
+- 系统调用API
+  - 进程管理: fork, execve, exit...
+  - 文件/设备管理: open, close, read, write...
+  - 存储管理: mmap, brk...
+  - send, recv, readdir, writev, poll, recvmsg, ptrace
