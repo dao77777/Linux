@@ -834,6 +834,7 @@
       - 提供TAS, lock xchg, lock add原子指令, 以原子指令构造其他原子指令达成互斥
       - LR/SC机制, 可构造任意原子指令
     - 自旋锁
+    - 互斥锁
     - 乐观锁
 - 原子性, 顺序性, 可见性
 - TSL(test and set locak), CAS(compare and swap)
