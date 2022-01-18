@@ -538,7 +538,8 @@
     IdentityFile <private_key_path>
   ```
 - `~/.ssh/id_rsa`: 私钥文件, ssh-keygen生成的默认地址
-- `~/.ssh/id_rsa.pub`: 公钥文件, ssh-keygen生成的默认地址 
+- `~/.ssh/id_rsa.pub`: 公钥文件, ssh-keygen生成的默认地址
+- 非根用户配置公钥无效?
 
 # 操作系统
 ## 职责
