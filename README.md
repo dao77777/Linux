@@ -439,6 +439,14 @@
 # 网络
 ## 网络管理
 - `/etc/sysconfig/network-scripts/网卡`: 配置文件
+  - BOOTPROTO="static" 
+  - ONBOOT="yes"
+  - IPADDR=192.168.255.101
+  - GATEWAY=192.168.255.2
+  - NETMASK=255.255.255.0
+  - DNS=192.168.255.1
+  - 配置完后service network restart即可
+- `ip addr`: 网卡配置查询
 - `netstat -ano|-tln`: 查询网络状态
 - `ping <IP>`: 测试主机是否能ping通
 - `telnet <IP> <PORT>`: 测试指定IP与PORT的服务
