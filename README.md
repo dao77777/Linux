@@ -526,7 +526,7 @@
   - `-i <private_key_path>`: 以公私钥的方式认证, 指定私钥文件地址
   - `-p <port>`: 指定ssh连接的端口号, 默认22
 - `ssh-keygen -o`: 生成公私钥匙, 默认生成地址为`~/.ssh`
-- `scp`
+- `scp local_file remote_username@remote_ip:remote_folder`
 - `~/.ssh/authorized_keys`: 配置认证的用户, 用公钥表示
 - `~/.ssh/known_hosts`: 与另一用户进行ssh通信后会自动生成known_hosts, 表示知道了该用户
 - `~/.ssh/config`: 用于配置ssh通信的目标, 本来是ssh `<username>@<host> -p <port> -i <private_key_path>`连接目标用户, 配置了后直接ssh config_user连接目标用户, 格式为
